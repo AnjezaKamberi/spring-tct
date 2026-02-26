@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Author;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ public class AuthorController {
     }
 
     @PostMapping
-    public String registerAuthor (@RequestBody Author author){
+    public ResponseEntity<String> registerAuthor (@RequestBody Author author){
         authors.add(author);
-        return "Regjistrimi u krye me sukses";
+        return ResponseEntity.ok("Regjistrimi u krye me sukses");
 
     }
 

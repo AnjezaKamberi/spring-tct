@@ -10,6 +10,8 @@ import java.util.List;
 @RequestMapping("/liber")
 public class LiberController {
 
+    //todo introduce LOGGER
+
     // FIELD INJECTION
 //    @Autowired
 //    private LiberService liberService;
@@ -19,7 +21,7 @@ public class LiberController {
 //        this.liberService = liberService;
 //    }
 
-//    private LiberService liberService = new LiberService();
+    //    private LiberService liberService = new LiberService();
     private final LiberService liberService;
 
     // CONSTRUCTOR INJECTION
@@ -46,4 +48,5 @@ public class LiberController {
     public boolean fshiLiber(@PathVariable String isbn) {
         return liberService.fshiLiber(isbn);
     }
+
 }
