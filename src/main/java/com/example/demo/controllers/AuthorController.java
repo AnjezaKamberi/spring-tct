@@ -40,6 +40,7 @@ public class AuthorController {
         }
         return authorsById.isEmpty() ? null : authorsById.get(0);
     }
+
     @DeleteMapping("/{id}")
     public String deleteAuthor(@PathVariable int id){
         boolean fshi = authors.removeIf(a -> a.getId()== id);
