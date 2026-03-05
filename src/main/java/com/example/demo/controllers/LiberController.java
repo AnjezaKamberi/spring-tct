@@ -1,7 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Liber;
+import com.example.demo.models.LiberDTO;
 import com.example.demo.services.LiberService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,8 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/liber")
 public class LiberController {
-
-    //todo introduce LOGGER
 
     // FIELD INJECTION
 //    @Autowired
@@ -30,23 +31,28 @@ public class LiberController {
     }
 
     @GetMapping("/all")
-    public List<Liber> merrTeGjitheLibrat() {
-        return liberService.ktheLibrat();
+    public ResponseEntity<List<LiberDTO>> merrTeGjitheLibrat() {
+        return ResponseEntity.ok(liberService.ktheLibrat());
     }
 
     @PostMapping
-    public Liber shtoLiber(@RequestBody Liber liber) {
-        return liberService.shtoLiberTeRi(liber);
+    public ResponseEntity<LiberDTO> shtoLiber(@Valid @RequestBody LiberDTO liberDTO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(liberService.shtoLiberTeRi(liberDTO));
     }
 
     @PutMapping("{isbn}")
-    public Liber modifikoLiber(@PathVariable("isbn") String isbn, @RequestBody Liber liber) {
-        return liberService.modifikoLiberSipasISBN(isbn, liber);
+    public ResponseEntity<LiberDTO> modifikoLiber(@PathVariable("isbn") String isbn, @RequestBody LiberDTO liberDTO) {
+        return ResponseEntity.ok(liberService.modifikoLiberSipasISBN(isbn, liberDTO));
     }
 
     @DeleteMapping("{isbn}")
-    public boolean fshiLiber(@PathVariable String isbn) {
-        return liberService.fshiLiber(isbn);
+    public ResponseEntity<Void> fshiLiber(@PathVariable String isbn) {
+        liberService.fshiLiber(isbn);
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 
 }

@@ -1,17 +1,23 @@
 package com.example.demo.models;
 
-public class Author {
+import jakarta.validation.constraints.Email;
+
+public class AuthorDTO {
 
     private String name;
     private String surname;
+    @Email
+    private String email;
+
+//    @Min
     private int age;
     private int id;
 
-    public Author() {
+    public AuthorDTO() {
 
     }
 
-    public Author(String name, String surname, int age, int id) {
+    public AuthorDTO(String name, String surname, int age, int id) {
         this.name = name;
         this.surname = surname;
         this.age = age;
